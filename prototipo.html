@@ -1,0 +1,928 @@
+<title>Tu Voto Vallenato</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%23F4B400%22/%3E%3Cpath%20d%3D%22M21%2017%20L25%2014%20L29%2017%20L33%2014%20L37%2017%20L41%2014%20L43%2017%20L43%2047%20L41%2050%20L37%2047%20L33%2050%20L29%2047%20L25%2050%20L21%2047%20Z%22%20fill%3D%22%23E23D32%22/%3E%3Cpath%20d%3D%22M25%2014%20V50%20M29%2017%20V47%20M33%2014%20V50%20M37%2017%20V47%20M41%2014%20V50%22%20stroke%3D%22%238E1F1A%22%20stroke-width%3D%222%22/%3E%3Crect%20x%3D%228%22%20y%3D%2213%22%20width%3D%2214%22%20height%3D%2238%22%20rx%3D%223.5%22%20fill%3D%22%231A1405%22/%3E%3Crect%20x%3D%2242%22%20y%3D%2213%22%20width%3D%2214%22%20height%3D%2238%22%20rx%3D%223.5%22%20fill%3D%22%231A1405%22/%3E%3Ccircle%20cx%3D%2215%22%20cy%3D%2221%22%20r%3D%222.4%22%20fill%3D%22%23F4F1E8%22/%3E%3Ccircle%20cx%3D%2215%22%20cy%3D%2229%22%20r%3D%222.4%22%20fill%3D%22%23F4F1E8%22/%3E%3Ccircle%20cx%3D%2215%22%20cy%3D%2237%22%20r%3D%222.4%22%20fill%3D%22%23F4F1E8%22/%3E%3Ccircle%20cx%3D%2215%22%20cy%3D%2245%22%20r%3D%222.4%22%20fill%3D%22%23F4F1E8%22/%3E%3Crect%20x%3D%2245%22%20y%3D%2218%22%20width%3D%228%22%20height%3D%224%22%20rx%3D%221.5%22%20fill%3D%22%23F4F1E8%22/%3E%3Crect%20x%3D%2245%22%20y%3D%2226%22%20width%3D%228%22%20height%3D%224%22%20rx%3D%221.5%22%20fill%3D%22%23F4F1E8%22/%3E%3Crect%20x%3D%2245%22%20y%3D%2234%22%20width%3D%228%22%20height%3D%224%22%20rx%3D%221.5%22%20fill%3D%22%23F4F1E8%22/%3E%3Crect%20x%3D%2245%22%20y%3D%2242%22%20width%3D%228%22%20height%3D%224%22%20rx%3D%221.5%22%20fill%3D%22%23F4F1E8%22/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Figtree:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: barra de prototipo arriba + "dispositivo" centrado (móvil / tablet / escritorio) que contiene la app.
+   Mundo visual: noche de tarima en Valledupar — verde monte, amarillo sol, rojo pollera, franjas de mochila. Tema único oscuro, a propósito. */
+:root{
+  --monte:#0D271E;      /* fondo */
+  --monte-2:#133528;    /* superficie */
+  --monte-3:#1B4535;    /* elevada */
+  --linea:#2B5A46;
+  --sol:#F4B400;        /* acento */
+  --sol-suave:#F4B40022;
+  --pollera:#E23D32;    /* acento 2 */
+  --rio:#35B2A1;        /* estado bueno */
+  --texto:#F4F1E8;
+  --texto-2:#B4C6BA;
+  --tinta:#1A1405;      /* texto sobre amarillo */
+  --f-display:"Alfa Slab One", "Rockwell", "Roboto Slab", Georgia, serif;
+  --f-body:"Figtree", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+  --r:14px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{background:var(--monte);color:var(--texto)}
+body{font-family:var(--f-body);font-size:15px;line-height:1.5;padding-inline:0;padding-block:0}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:var(--sol)}
+:focus-visible{outline:3px solid var(--sol);outline-offset:2px;border-radius:6px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ---------- barra de prototipo ---------- */
+.proto{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:#08190F;border-bottom:1px solid var(--linea);padding:10px 16px}
+.proto-in{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center}
+.proto-tag{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--tinta);background:var(--sol);padding:3px 8px;border-radius:4px;font-weight:600}
+.proto label{font-size:12px;color:var(--texto-2)}
+.proto select{background:var(--monte-2);border:1px solid var(--linea);border-radius:8px;padding:6px 8px;min-width:0;max-width:100%}
+.seg{display:inline-flex;border:1px solid var(--linea);border-radius:8px;overflow:hidden}
+.seg button{background:transparent;border:0;padding:6px 10px;font-size:12px;cursor:pointer;color:var(--texto-2)}
+.seg button[aria-pressed="true"]{background:var(--monte-3);color:var(--texto)}
+.trace{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+.chip{font-family:var(--f-mono);font-size:11px;border:1px solid var(--linea);border-radius:999px;padding:2px 8px;color:var(--texto-2)}
+.chip.cu{border-color:var(--sol);color:var(--sol)}
+@media (max-width:640px){.sizes{display:none}.trace{margin-left:0}}
+
+/* ---------- dispositivo ---------- */
+.stage{padding:20px 16px 40px;display:flex;justify-content:center}
+.device{container-type:inline-size;width:100%;max-width:1180px;background:var(--monte);border:1px solid var(--linea);border-radius:22px;overflow:hidden;position:relative;transition:max-width .3s}
+.device[data-size="movil"]{max-width:400px;border-width:8px;border-color:#050F0A;border-radius:34px}
+.device[data-size="tablet"]{max-width:780px;border-width:8px;border-color:#050F0A}
+@media (max-width:640px){.stage{padding:0}.device,.device[data-size]{border:0;border-radius:0;max-width:none}}
+
+.screen{min-height:620px;display:flex;flex-direction:column}
+.wrap{padding:18px 16px 28px;width:100%;max-width:980px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+
+/* franja de mochila */
+.franja{height:12px;background:
+  linear-gradient(135deg,var(--sol) 25%,transparent 25%) -6px 0/12px 12px,
+  linear-gradient(225deg,var(--sol) 25%,transparent 25%) -6px 0/12px 12px,
+  linear-gradient(315deg,var(--monte) 25%,transparent 25%) 0 0/12px 12px,
+  linear-gradient(45deg,var(--monte) 25%,transparent 25%) 0 0/12px 12px,
+  var(--pollera)}
+
+/* ---------- barra superior de la app ---------- */
+.appbar{display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--monte-2);border-bottom:1px solid var(--linea)}
+.brand{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--texto);background:none;border:0;cursor:pointer;padding:0}
+.brand-mark{width:34px;height:34px;border-radius:10px;display:block;overflow:hidden}.brand-mark svg{width:100%;height:100%;display:block}
+.brand b{font-family:var(--f-display);font-weight:400;font-size:17px;letter-spacing:.01em;line-height:1}
+.brand small{display:block;font-size:10px;color:var(--texto-2);letter-spacing:.12em;text-transform:uppercase}
+.topnav{display:none;gap:4px;margin-left:18px}
+.topnav button{background:none;border:0;color:var(--texto-2);padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:600}
+.topnav button:hover{color:var(--texto);background:var(--monte-3)}
+.appbar .sp{flex:1}
+@container (min-width:700px){.topnav{display:flex}.tabbar{display:none!important}}
+
+.tabbar{position:sticky;bottom:0;display:grid;grid-template-columns:repeat(3,1fr);background:var(--monte-2);border-top:1px solid var(--linea);margin-top:auto;padding-bottom:env(safe-area-inset-bottom,0px)}
+.tabbar button{background:none;border:0;padding:9px 4px 10px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;color:var(--texto-2);cursor:pointer;font-weight:600}
+.tabbar button.on{color:var(--sol)}
+.tabbar svg{width:22px;height:22px}
+
+/* ---------- botones y controles ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:12px;padding:12px 18px;font-weight:700;border:2px solid transparent;cursor:pointer;text-decoration:none;font-size:15px;line-height:1.1}
+.btn-sol{background:var(--sol);color:var(--tinta)}
+.btn-sol:hover{filter:brightness(1.07)}
+.btn-sol:disabled{background:var(--monte-3);color:var(--texto-2);cursor:not-allowed}
+.btn-ghost{background:transparent;border-color:var(--linea);color:var(--texto)}
+.btn-ghost:hover{border-color:var(--texto-2)}
+.btn-rojo{background:var(--pollera);color:#fff}
+.btn-sm{padding:7px 12px;font-size:13px;border-radius:9px}
+.btn-block{width:100%}
+.link{background:none;border:0;color:var(--sol);font-weight:700;cursor:pointer;padding:0}
+
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-weight:600;font-size:14px}
+.field .hint{font-size:12px;color:var(--texto-2)}
+.input{background:var(--monte);border:1.5px solid var(--linea);border-radius:10px;padding:11px 12px;width:100%;min-width:0}
+.input:focus{border-color:var(--sol);outline:none;box-shadow:0 0 0 3px var(--sol-suave)}
+.input.err{border-color:var(--pollera)}
+.errmsg{font-size:12.5px;color:#FF8A80;min-height:0}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--texto-2)}
+.check input{margin-top:3px;accent-color:var(--sol);width:18px;height:18px;flex:none}
+
+/* ---------- piezas ---------- */
+.eyebrow{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sol)}
+h1,h2,h3{margin:0;text-wrap:balance}
+.h-display{font-family:var(--f-display);font-weight:400;line-height:1.02;letter-spacing:.005em}
+h2.sec{font-size:20px;font-weight:800;display:flex;align-items:center;gap:10px}
+.muted{color:var(--texto-2)}
+p{margin:0}
+.pend{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--sol);border:1px dashed var(--sol);border-radius:6px;padding:2px 7px;letter-spacing:.02em;white-space:nowrap}
+.ejemplo{display:flex;gap:10px;align-items:flex-start;background:var(--monte-2);border:1px dashed var(--linea);border-radius:12px;padding:10px 12px;font-size:13px;color:var(--texto-2)}
+.ejemplo b{color:var(--texto)}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:3px 10px}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.pill.abierta{color:var(--rio);background:#35B2A11F}
+.pill.proxima{color:var(--sol);background:var(--sol-suave)}
+.pill.cerrada{color:var(--texto-2);background:#B4C6BA1A}
+.pill.borrador{color:#C9A8FF;background:#C9A8FF1A}
+.pill.inactiva{color:#FF8A80;background:#E23D321F}
+.panel{background:var(--monte-2);border:1px solid var(--linea);border-radius:var(--r);padding:16px}
+.back{display:inline-flex;align-items:center;gap:6px;background:none;border:0;color:var(--texto-2);cursor:pointer;font-weight:600;padding:0;align-self:flex-start}
+.back:hover{color:var(--texto)}
+.crumbs{font-size:12.5px;color:var(--texto-2);display:flex;gap:6px;flex-wrap:wrap}
+.crumbs b{color:var(--texto);font-weight:600}
+
+/* ---------- inicio ---------- */
+.hero{position:relative;overflow:hidden;background:
+  radial-gradient(120% 90% at 85% 0%,#F4B40030 0,transparent 55%),
+  radial-gradient(90% 80% at 0% 100%,#E23D3230 0,transparent 60%),var(--monte-2);
+  border-bottom:1px solid var(--linea)}
+.hero-in{padding:26px 16px 22px;max-width:980px;margin:0 auto;display:grid;gap:18px;align-items:center}
+.hero h1{font-size:clamp(40px,11cqi,76px)}
+.hero h1 em{font-style:normal;color:var(--sol)}
+.hero h1 span{color:var(--pollera)}
+.hero p.lead{font-size:16px;color:var(--texto-2);max-width:46ch}
+.hero .cta{display:flex;gap:10px;flex-wrap:wrap}
+.acordeon{width:100%;max-width:330px;justify-self:center}
+.acordeon .fuelle{transform-origin:50% 50%;animation:respira 3.2s ease-in-out infinite}
+@keyframes respira{0%,100%{transform:scaleX(1)}50%{transform:scaleX(.9)}}
+@container (min-width:700px){.hero-in{grid-template-columns:1.25fr 1fr;padding:44px 24px 36px}.acordeon{max-width:380px}}
+.edicion{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:13px;color:var(--texto-2)}
+.aires{display:flex;gap:6px;flex-wrap:wrap}
+.aire{font-family:var(--f-display);font-size:12px;padding:4px 10px;border-radius:999px;background:var(--monte);border:1px solid var(--linea);color:var(--texto)}
+
+.destacada{display:grid;gap:14px;background:var(--sol);color:var(--tinta);border-radius:18px;padding:18px;position:relative;overflow:hidden}
+.destacada::after{content:"";position:absolute;right:-30px;bottom:-30px;width:140px;height:140px;border-radius:50%;border:18px solid #0000001A}
+.destacada .eyebrow{color:var(--tinta);opacity:.75}
+.destacada h3{font-family:var(--f-display);font-weight:400;font-size:26px;line-height:1.05}
+.destacada .meta{display:flex;gap:12px;flex-wrap:wrap;font-size:13px;font-weight:600}
+.destacada .btn{background:var(--tinta);color:var(--sol);justify-self:start;position:relative;z-index:1}
+.cuenta{display:flex;gap:8px}
+.cuenta div{background:#1A140514;border-radius:10px;padding:6px 10px;text-align:center;min-width:58px}
+.cuenta b{display:block;font-family:var(--f-display);font-weight:400;font-size:22px;font-variant-numeric:tabular-nums;line-height:1.1}
+.cuenta small{font-size:10px;text-transform:uppercase;letter-spacing:.1em;font-weight:700}
+
+/* ---------- categorías ---------- */
+.grid-cat{display:grid;gap:12px;grid-template-columns:1fr}
+@container (min-width:560px){.grid-cat{grid-template-columns:repeat(2,1fr)}}
+@container (min-width:900px){.grid-cat{grid-template-columns:repeat(3,1fr)}}
+.cat{display:flex;flex-direction:column;text-align:left;border:1px solid var(--linea);background:var(--monte-2);border-radius:16px;overflow:hidden;cursor:pointer;padding:0;transition:transform .15s,border-color .15s}
+.cat:hover{transform:translateY(-2px);border-color:var(--sol)}
+.cat-art{height:92px;position:relative;display:flex;align-items:flex-end;padding:10px 14px}
+.cat-art .ico{position:absolute;right:12px;top:10px;width:56px;height:56px;opacity:.95}
+.cat-art .n{font-family:var(--f-display);font-size:13px;background:var(--monte);color:var(--texto);padding:3px 9px;border-radius:999px}
+.cat-body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:4px}
+.cat-body h3{font-size:18px;font-weight:800}
+.cat-body p{font-size:13px;color:var(--texto-2)}
+
+/* ---------- votaciones ---------- */
+.vlist{display:flex;flex-direction:column;gap:10px}
+.vrow{display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:center;background:var(--monte-2);border:1px solid var(--linea);border-radius:14px;padding:14px;text-align:left;cursor:pointer;width:100%}
+.vrow:hover{border-color:var(--texto-2)}
+.vrow[aria-disabled="true"]{cursor:default}
+.vrow h3{font-size:16.5px;font-weight:800}
+.vrow .meta{grid-column:1/-1;font-size:12.5px;color:var(--texto-2);display:flex;gap:12px;flex-wrap:wrap}
+.vrow .go{color:var(--sol);font-size:22px;font-weight:800}
+
+/* ---------- detalle ---------- */
+.det-hero{border-radius:18px;padding:18px;background:linear-gradient(160deg,var(--monte-3),var(--monte-2));border:1px solid var(--linea);display:flex;flex-direction:column;gap:10px}
+.det-hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(28px,7.5cqi,44px);line-height:1.05}
+.reglas{display:grid;gap:10px}
+@container (min-width:620px){.reglas{grid-template-columns:repeat(2,1fr)}}
+.regla{display:flex;gap:12px;align-items:flex-start;background:var(--monte-2);border:1px solid var(--linea);border-radius:12px;padding:12px}
+.regla .ic{flex:none;width:36px;height:36px;border-radius:10px;background:var(--sol-suave);color:var(--sol);display:grid;place-items:center;font-weight:800}
+.regla b{display:block;font-size:14px}
+.regla span{font-size:13px;color:var(--texto-2)}
+
+/* ---------- opciones ---------- */
+.ops{display:grid;gap:12px;grid-template-columns:1fr}
+@container (min-width:560px){.ops{grid-template-columns:repeat(2,1fr)}}
+@container (min-width:900px){.ops{grid-template-columns:repeat(4,1fr)}}
+.op{position:relative;display:flex;flex-direction:column;text-align:left;background:var(--monte-2);border:2px solid var(--linea);border-radius:16px;overflow:hidden;cursor:pointer;padding:0;transition:border-color .15s,transform .15s}
+.op:hover{border-color:var(--texto-2)}
+.op[aria-checked="true"]{border-color:var(--sol);transform:translateY(-2px);box-shadow:0 8px 24px #00000055}
+.op .thumb{aspect-ratio:16/9;max-width:100%;display:grid;place-items:center;position:relative;overflow:hidden}
+.op .thumb b{font-family:var(--f-display);font-weight:400;font-size:44px;color:#FFFFFFE6;text-shadow:0 3px 0 #0003}
+.op .thumb .franja{position:absolute;left:0;right:0;bottom:0}
+.op .ob{padding:12px 14px 14px;display:flex;flex-direction:column;gap:4px}
+.op h3{font-size:16.5px;font-weight:800}
+.op .sub{font-size:12.5px;color:var(--texto-2)}
+.op .tick{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;background:var(--monte);border:2px solid var(--texto-2);display:grid;place-items:center;color:transparent;font-weight:900}
+.op[aria-checked="true"] .tick{background:var(--sol);border-color:var(--sol);color:var(--tinta)}
+.votebar{position:sticky;bottom:0;background:linear-gradient(to top,var(--monte) 70%,transparent);padding:18px 16px 16px;margin-top:auto}
+.votebar-in{max-width:980px;margin:0 auto;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.votebar-in .sel{flex:1;min-width:0;font-size:13px;color:var(--texto-2)}
+.votebar-in .sel b{color:var(--texto);display:block;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ---------- confirmación / resultado ---------- */
+.center{flex:1;display:flex;align-items:center;justify-content:center;padding:26px 16px}
+.sheet{width:100%;max-width:440px;background:var(--monte-2);border:1px solid var(--linea);border-radius:22px;overflow:hidden}
+.sheet-top{padding:20px;display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center}
+.sheet-top h1{font-family:var(--f-display);font-weight:400;font-size:28px;line-height:1.1}
+.elegida{width:100%;display:flex;gap:12px;align-items:center;background:var(--monte);border:2px solid var(--sol);border-radius:14px;padding:10px;text-align:left}
+.elegida .mini{width:58px;height:58px;border-radius:10px;flex:none;display:grid;place-items:center;font-family:var(--f-display);font-size:24px;color:#fff}
+.aviso{font-size:13px;color:var(--texto-2);display:flex;gap:8px;align-items:flex-start;text-align:left;background:#E23D3214;border:1px solid #E23D3255;border-radius:10px;padding:10px}
+.aviso b{color:var(--texto)}
+.sheet-actions{display:grid;gap:10px;padding:0 20px 20px}
+.sello{width:96px;height:96px;border-radius:50%;display:grid;place-items:center;background:var(--sol);color:var(--tinta);font-size:44px;font-weight:900;box-shadow:0 0 0 8px var(--sol-suave);animation:pop .5s cubic-bezier(.2,1.6,.4,1)}
+.sello.mal{background:var(--pollera);color:#fff;box-shadow:0 0 0 8px #E23D3226}
+.sello.gris{background:var(--monte-3);color:var(--texto-2);box-shadow:0 0 0 8px #B4C6BA14}
+@keyframes pop{from{transform:scale(.6)}to{transform:scale(1)}}
+.comprobante{width:100%;border:1.5px dashed var(--linea);border-radius:12px;padding:12px;display:grid;gap:6px;text-align:left;font-size:13px}
+.comprobante div{display:flex;justify-content:space-between;gap:10px}
+.comprobante span{color:var(--texto-2)}
+.comprobante code{font-family:var(--f-mono);font-size:14px;color:var(--sol);font-weight:600}
+.variantes{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;padding:10px 16px 0}
+
+/* ---------- auth ---------- */
+.auth{flex:1;display:grid;gap:0}
+@container (min-width:760px){.auth{grid-template-columns:1fr 1fr}}
+.auth-side{display:none;background:var(--pollera);position:relative;overflow:hidden;padding:36px;flex-direction:column;justify-content:flex-end;gap:10px}
+.auth-side h2{font-family:var(--f-display);font-weight:400;font-size:40px;line-height:1.02;color:#fff}
+.auth-side p{color:#FFE9E4}
+.auth-side .franja{position:absolute;top:0;left:0;right:0}
+@container (min-width:760px){.auth-side{display:flex}}
+.auth-form{padding:22px 16px 32px;display:flex;flex-direction:column;gap:14px;max-width:460px;width:100%;margin:0 auto}
+.auth-form h1{font-family:var(--f-display);font-weight:400;font-size:32px;line-height:1.05}
+.demo{display:grid;gap:8px;grid-template-columns:1fr 1fr}
+
+/* ---------- admin ---------- */
+.admin{display:flex;flex-direction:column;flex:1;min-height:620px}
+.adm-bar{display:flex;align-items:center;gap:10px;padding:12px 16px;background:#08190F;border-bottom:1px solid var(--linea)}
+.adm-bar .role{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--pollera);border:1px solid var(--pollera);border-radius:4px;padding:2px 6px}
+.adm-body{display:flex;flex-direction:column;flex:1;min-width:0}
+.adm-nav{display:flex;gap:6px;overflow-x:auto;padding:10px 16px;border-bottom:1px solid var(--linea);background:var(--monte-2)}
+.adm-nav button{flex:none;background:none;border:1px solid transparent;border-radius:9px;padding:8px 12px;color:var(--texto-2);font-weight:700;cursor:pointer;display:flex;gap:8px;align-items:center;font-size:13.5px}
+.adm-nav button.on{background:var(--monte-3);color:var(--texto);border-color:var(--linea)}
+.adm-nav button.on .dot{background:var(--sol)}
+.adm-nav .dot{width:8px;height:8px;border-radius:2px;background:var(--linea);flex:none}
+.adm-main{padding:18px 16px 28px;display:flex;flex-direction:column;gap:18px;min-width:0;flex:1}
+@container (min-width:900px){
+  .adm-body{flex-direction:row}
+  .adm-nav{flex-direction:column;width:220px;flex:none;border-bottom:0;border-right:1px solid var(--linea);padding:16px 12px;overflow:visible}
+  .adm-main{padding:24px}
+}
+.adm-head{display:flex;gap:12px;align-items:flex-end;justify-content:space-between;flex-wrap:wrap}
+.adm-head h1{font-size:24px;font-weight:800}
+.kpis{display:grid;gap:10px;grid-template-columns:repeat(2,1fr)}
+@container (min-width:700px){.kpis{grid-template-columns:repeat(4,1fr)}}
+.kpi{background:var(--monte-2);border:1px solid var(--linea);border-radius:12px;padding:12px 14px}
+.kpi small{font-size:12px;color:var(--texto-2);display:block}
+.kpi b{font-family:var(--f-display);font-weight:400;font-size:28px;font-variant-numeric:tabular-nums}
+.kpi em{font-style:normal;font-size:11px;color:var(--texto-2)}
+.two{display:grid;gap:14px}
+@container (min-width:900px){.two{grid-template-columns:1.4fr 1fr}}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--linea);border-radius:12px}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:13.5px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--linea);vertical-align:middle}
+th{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--texto-2);background:var(--monte-2);font-weight:700}
+tr:last-child td{border-bottom:0}
+td.num{font-variant-numeric:tabular-nums;text-align:right}
+.acts{display:flex;gap:6px;flex-wrap:wrap}
+.log{display:flex;flex-direction:column;gap:0;font-size:13px}
+.log li{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;padding:9px 0;border-bottom:1px solid var(--linea)}
+.log li:last-child{border-bottom:0}
+.log time{font-family:var(--f-mono);font-size:11.5px;color:var(--texto-2)}
+.log ul{margin:0;padding:0;list-style:none}
+.form-grid{display:grid;gap:14px}
+@container (min-width:620px){.form-grid{grid-template-columns:1fr 1fr}.form-grid .full{grid-column:1/-1}}
+.note{font-size:12.5px;color:var(--texto-2)}
+.inline-just{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.inline-just .input{flex:1;min-width:160px;padding:8px 10px}
+.opt-cell{display:flex;gap:10px;align-items:center}
+.opt-cell .mini{width:40px;height:40px;border-radius:9px;flex:none;display:grid;place-items:center;font-family:var(--f-display);color:#fff}
+.bars{display:flex;flex-direction:column;gap:14px}
+.bar-row{display:grid;gap:6px}
+.bar-top{display:flex;justify-content:space-between;gap:10px;font-size:14px}
+.bar-top b{font-weight:700}
+.bar-top span{font-variant-numeric:tabular-nums;color:var(--texto-2)}
+.bar-top span strong{color:var(--texto)}
+.track{height:14px;border-radius:999px;background:var(--monte);border:1px solid var(--linea);overflow:hidden}
+.fill{height:100%;border-radius:999px;background:var(--texto-2)}
+.fill.lider{background:var(--sol)}
+.row-between{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(20px);background:var(--texto);color:var(--monte);font-weight:700;padding:10px 16px;border-radius:12px;opacity:0;pointer-events:none;transition:.25s;z-index:99;max-width:calc(100% - 32px);text-align:center;font-size:14px}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.peso{display:flex;height:12px;border-radius:999px;overflow:hidden;border:1px solid var(--linea)}
+.peso .j,.track .fj{background:var(--sol);height:100%}.peso .p,.track .fp{background:var(--rio);height:100%}
+.track.apil{display:flex}.track.apil div{border-radius:0}
+.leyenda{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12.5px;color:var(--texto-2)}.leyenda i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.regla.full{grid-column:1/-1}.regla.full>div{flex:1;display:flex;flex-direction:column;gap:6px}
+.escala{display:flex;flex-wrap:wrap;gap:6px}.escala button{min-width:40px;height:40px;border-radius:10px;border:1px solid var(--linea);background:var(--monte);color:var(--texto);font:inherit;font-weight:800;cursor:pointer}
+.escala button:hover{border-color:var(--sol);color:var(--sol)}.escala button.on{background:var(--sol);border-color:var(--sol);color:var(--tinta)}
+.jcard{background:var(--monte-2);border:1px solid var(--linea);border-radius:var(--r);padding:14px;display:flex;flex-direction:column;gap:10px}
+.jcard.falta{border-color:var(--pollera)}
+.jhead{display:flex;gap:12px;align-items:center}.jhead .mini{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-family:var(--f-display);font-size:20px;color:#fff;flex:none}.jhead b{display:block}
+.nota-j{margin-left:auto;font-family:var(--f-display);font-size:30px;line-height:1;color:var(--sol)}
+.checks{display:flex;flex-wrap:wrap;gap:8px 18px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+
+<!-- ============ BARRA DE PROTOTIPO ============ -->
+<div class="proto" role="region" aria-label="Controles del prototipo">
+  <div class="proto-in">
+    <span class="proto-tag">Prototipo · Entrega 1</span>
+    <label for="pick">Pantalla</label>
+    <select id="pick" aria-label="Ir a pantalla">
+      <optgroup label="Interfaz pública">
+        <option value="inicio">1. Página de inicio</option>
+        <option value="registro">2. Registro</option>
+        <option value="login">3. Inicio de sesión</option>
+        <option value="categorias">4. Categorías</option>
+        <option value="votaciones">5. Votaciones disponibles</option>
+        <option value="detalle">6. Detalle de la votación</option>
+        <option value="opciones">7. Opciones disponibles</option>
+        <option value="confirmacion">8. Confirmación del voto</option>
+        <option value="resultado">9. Resultado / mensaje posterior</option>
+      </optgroup>
+      <optgroup label="Administración">
+        <option value="a-panel">10. Panel principal</option>
+        <option value="a-categorias">11. Gestión de categorías</option>
+        <option value="a-votaciones">12. Gestión de votaciones</option>
+        <option value="a-opciones">13. Gestión de opciones</option>
+        <option value="a-resultados">14. Consulta de resultados</option>
+        <option value="a-jurados">17. Gestión de jurados</option>
+      </optgroup>
+      <optgroup label="Jurado">
+        <option value="j-panel">15. Panel del jurado</option>
+        <option value="j-calificar">16. Calificar participantes</option>
+      </optgroup>
+    </select>
+    <div class="seg sizes" role="group" aria-label="Tamaño de pantalla">
+      <button type="button" data-size="movil" aria-pressed="true">Móvil</button>
+      <button type="button" data-size="tablet" aria-pressed="false">Tablet</button>
+      <button type="button" data-size="escritorio" aria-pressed="false">Escritorio</button>
+    </div>
+    <div class="trace" id="trace" aria-label="Trazabilidad"></div>
+  </div>
+</div>
+
+<div class="stage">
+<div class="device" id="device" data-size="movil">
+
+<!-- ============ 1. INICIO ============ -->
+<section class="screen" data-screen="inicio">
+  <div data-slot="appbar"></div>
+  <div class="hero">
+    <div class="hero-in">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="edicion"><span class="eyebrow">Festival 2027 · Edición 60</span><span class="pend">Fechas pendientes de validación</span></div>
+        <h1 class="h-display">Que <em>suene</em> tu voto, <span>compadre</span>.</h1>
+        <p class="lead">Escoge tu categoría, mira las opciones y vota desde el celular. Un voto claro, con comprobante.</p>
+        <div class="aires" aria-label="Los cuatro aires"><span class="aire">Paseo</span><span class="aire">Merengue</span><span class="aire">Son</span><span class="aire">Puya</span></div>
+        <div class="cta">
+          <button class="btn btn-sol" data-go="categorias">Ver votaciones</button>
+          <button class="btn btn-ghost" data-go="registro">Crear cuenta</button>
+        </div>
+      </div>
+      <svg class="acordeon" id="acordeon" viewBox="0 0 360 220" role="img" aria-label="Ilustración de un acordeón"></svg>
+    </div>
+    <div class="franja"></div>
+  </div>
+  <div class="wrap">
+    <div class="ejemplo"><span aria-hidden="true">✳</span><span><b>Contenido ilustrativo.</b> Categorías, votaciones y opciones de este prototipo son ejemplos; el cliente no las ha aprobado.</span></div>
+    <h2 class="sec">Abierta ahora</h2>
+    <div class="destacada">
+      <span class="eyebrow">Música · Votación abierta</span>
+      <h3>Mejor canción inédita</h3>
+      <div class="cuenta" aria-label="Tiempo para el cierre (ejemplo)">
+        <div><b>02</b><small>días</small></div><div><b>14</b><small>horas</small></div><div><b>36</b><small>min</small></div>
+      </div>
+      <div class="meta"><span>4 canciones</span><span>1 voto por persona*</span></div>
+      <button class="btn" data-go="detalle" data-vot="cancion">Votar ahora →</button>
+    </div>
+    <p class="note">* Regla propuesta por el equipo. Pendiente de validación con el cliente (RN-06).</p>
+    <h2 class="sec">Categorías</h2>
+    <div class="grid-cat" data-slot="cats"></div>
+  </div>
+  <div data-slot="tabbar" data-tab="inicio"></div>
+</section>
+
+<!-- ============ 2. REGISTRO ============ -->
+<section class="screen" data-screen="registro" hidden>
+  <div data-slot="appbar"></div>
+  <div class="auth">
+    <div class="auth-side"><div class="franja"></div><h2>Tu voz también cuenta en la tarima.</h2><p>Crea tu cuenta una sola vez y vota en las votaciones abiertas del Festival.</p></div>
+    <form class="auth-form" id="f-registro" novalidate>
+      <button type="button" class="back" data-go="inicio">← Volver</button>
+      <span class="eyebrow">Paso 1 de 1</span>
+      <h1>Crea tu cuenta</h1>
+      <div class="field"><label for="r-nombre">Nombre completo</label><input class="input" id="r-nombre" autocomplete="name" value="Ana María Pérez"><span class="errmsg" id="e-nombre"></span></div>
+      <div class="field">
+        <label for="r-id">Correo electrónico</label>
+        <input class="input" id="r-id" type="email" autocomplete="email" placeholder="tucorreo@ejemplo.com">
+        <span class="hint">Dato de identificación del votante: <span class="pend">Pendiente de validación · P-01</span></span>
+        <span class="errmsg" id="e-id"></span>
+      </div>
+      <div class="field"><label for="r-pass">Contraseña</label><input class="input" id="r-pass" type="password" autocomplete="new-password" placeholder="Mínimo 8 caracteres"><span class="errmsg" id="e-pass"></span></div>
+      <label class="check" for="r-datos"><input type="checkbox" id="r-datos"><span>Autorizo el tratamiento de mis datos personales según la política de la Fundación (Ley 1581 de 2012). <span class="pend">Política por definir · P-08</span></span></label>
+      <span class="errmsg" id="e-datos"></span>
+      <button class="btn btn-sol btn-block" type="submit">Crear cuenta</button>
+      <p class="muted" style="font-size:14px;text-align:center">¿Ya tienes cuenta? <button type="button" class="link" data-go="login">Inicia sesión</button></p>
+    </form>
+  </div>
+</section>
+
+<!-- ============ 3. LOGIN ============ -->
+<section class="screen" data-screen="login" hidden>
+  <div data-slot="appbar"></div>
+  <div class="auth">
+    <div class="auth-side"><div class="franja"></div><h2>¡Bienvenido de vuelta a la parranda!</h2><p>Entra para votar o para administrar las votaciones.</p></div>
+    <form class="auth-form" id="f-login" novalidate>
+      <button type="button" class="back" data-go="inicio">← Volver</button>
+      <h1>Inicia sesión</h1>
+      <div class="field"><label for="l-id">Correo electrónico</label><input class="input" id="l-id" type="email" autocomplete="email" placeholder="tucorreo@ejemplo.com"></div>
+      <div class="field"><label for="l-pass">Contraseña</label><input class="input" id="l-pass" type="password" autocomplete="current-password"><span class="errmsg" id="e-login"></span></div>
+      <div class="row-between"><label class="check" for="l-rec"><input type="checkbox" id="l-rec">Recordarme</label><button type="button" class="link" data-toast="Te enviaríamos un enlace de recuperación por correo (RF-02).">Olvidé mi contraseña</button></div>
+      <button class="btn btn-sol btn-block" type="submit">Entrar</button>
+      <div class="panel" style="display:grid;gap:10px">
+        <span class="eyebrow">Accesos de demostración</span>
+        <div class="demo">
+          <button type="button" class="btn btn-ghost btn-sm" id="demo-votante">Entrar como votante</button>
+          <button type="button" class="btn btn-ghost btn-sm" id="demo-admin">Entrar como administrador</button>
+          <button type="button" class="btn btn-ghost btn-sm" id="demo-jurado">Entrar como jurado</button>
+        </div>
+      </div>
+      <p class="muted" style="font-size:14px;text-align:center">¿No tienes cuenta? <button type="button" class="link" data-go="registro">Regístrate</button></p>
+    </form>
+  </div>
+</section>
+
+<!-- ============ 4. CATEGORÍAS ============ -->
+<section class="screen" data-screen="categorias" hidden>
+  <div data-slot="appbar"></div>
+  <div class="wrap">
+    <div class="crumbs"><span>Festival 2027</span>›<b>Categorías</b></div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <h1 class="h-display" style="font-size:32px">Categorías</h1>
+      <p class="muted">Elige una categoría para ver sus votaciones.</p>
+    </div>
+    <div class="ejemplo"><span aria-hidden="true">✳</span><span><b>Ejemplo ilustrativo.</b> Las categorías reales las define la Fundación (P-07).</span></div>
+    <div class="grid-cat" data-slot="cats"></div>
+  </div>
+  <div data-slot="tabbar" data-tab="categorias"></div>
+</section>
+
+<!-- ============ 5. VOTACIONES ============ -->
+<section class="screen" data-screen="votaciones" hidden>
+  <div data-slot="appbar"></div>
+  <div class="wrap" id="v-wrap"></div>
+  <div data-slot="tabbar" data-tab="categorias"></div>
+</section>
+
+<!-- ============ 6. DETALLE ============ -->
+<section class="screen" data-screen="detalle" hidden>
+  <div data-slot="appbar"></div>
+  <div class="wrap">
+    <button class="back" data-go="votaciones">← Votaciones de Música</button>
+    <div class="det-hero">
+      <div class="row-between"><span class="eyebrow">Música</span><span class="pill abierta">Abierta</span></div>
+      <h1>Mejor canción inédita</h1>
+      <p class="muted">Escoge la canción inédita que más te llegó al corazón. El jurado califica a cada participante y tu voto también cuenta en el resultado final.</p>
+    </div>
+    <h2 class="sec">Reglas de esta votación</h2>
+    <div class="reglas">
+      <div class="regla"><span class="ic">1×</span><div><b>Un voto por persona en esta votación</b><span>Valor propuesto por defecto. <span class="pend">RN-06</span></span></div></div>
+      <div class="regla"><span class="ic">⏱</span><div><b>Abre 26 abr 2027 · 8:00 a. m.</b><span>Cierra 29 abr 2027 · 11:59 p. m. (fechas de ejemplo)</span></div></div>
+      <div class="regla"><span class="ic">🔒</span><div><b>Tu voto no se puede cambiar</b><span>Por eso te pedimos confirmarlo antes. <span class="pend">RN-05</span></span></div></div>
+      <div class="regla"><span class="ic">%</span><div><b>Resultados públicos</b><span>Cuándo y cómo se muestran lo decide el cliente. <span class="pend">P-05</span></span></div></div>
+      <div class="regla full"><span class="ic">⚖</span><div><b>Cómo se define el ganador: jurado 70 % + público 30 %</b><span>El jurado califica de 1 a 10 a cada participante y el público vota. El resultado final combina los dos. <span class="pend">RN-11 · P-06</span></span>
+        <div class="peso" role="img" aria-label="Jurado 70 por ciento, público 30 por ciento"><div class="j" style="width:70%"></div><div class="p" style="width:30%"></div></div>
+        <div class="leyenda"><span><i style="background:var(--sol)"></i>Jurado 70 %</span><span><i style="background:var(--rio)"></i>Tu voto 30 %</span></div></div></div>
+    </div>
+    <button class="btn btn-sol btn-block" data-go="opciones">Ver las 4 opciones</button>
+  </div>
+  <div data-slot="tabbar" data-tab="categorias"></div>
+</section>
+
+<!-- ============ 7. OPCIONES ============ -->
+<section class="screen" data-screen="opciones" hidden>
+  <div data-slot="appbar"></div>
+  <div class="wrap">
+    <button class="back" data-go="detalle">← Reglas de la votación</button>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <span class="eyebrow">Mejor canción inédita</span>
+      <h1 class="h-display" style="font-size:30px">Escoge tu canción</h1>
+      <p class="muted">Toca una tarjeta para seleccionarla. Aún no se registra nada.</p>
+    </div>
+    <div class="ops" role="radiogroup" aria-label="Opciones de la votación" id="ops"></div>
+  </div>
+  <div class="votebar">
+    <div class="votebar-in">
+      <div class="sel" id="sel-txt">Ninguna opción seleccionada<b>—</b></div>
+      <button class="btn btn-sol" id="btn-votar" disabled>Votar</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8. CONFIRMACIÓN ============ -->
+<section class="screen" data-screen="confirmacion" hidden>
+  <div data-slot="appbar"></div>
+  <div class="center">
+    <div class="sheet" role="dialog" aria-labelledby="conf-t">
+      <div class="franja"></div>
+      <div class="sheet-top">
+        <span class="eyebrow">Último paso</span>
+        <h1 id="conf-t">¿Confirmas tu voto?</h1>
+        <div class="elegida" id="elegida"></div>
+        <div class="aviso"><span aria-hidden="true">!</span><span><b>Después de confirmar no podrás cambiarlo.</b> Recibirás un código de comprobante.</span></div>
+      </div>
+      <div class="sheet-actions">
+        <button class="btn btn-sol btn-block" id="btn-confirmar">Sí, confirmar mi voto</button>
+        <button class="btn btn-ghost btn-block" data-go="opciones">Cambiar opción</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9. RESULTADO ============ -->
+<section class="screen" data-screen="resultado" hidden>
+  <div data-slot="appbar"></div>
+  <div class="variantes" role="group" aria-label="Variantes del mensaje (prototipo)">
+    <span class="proto-tag" style="align-self:center">Ver variante</span>
+    <button class="btn btn-ghost btn-sm" data-var="ok">Voto registrado</button>
+    <button class="btn btn-ghost btn-sm" data-var="limite">Límite alcanzado</button>
+    <button class="btn btn-ghost btn-sm" data-var="cerrada">Votación cerrada</button>
+  </div>
+  <div class="center" id="res-box"></div>
+  <div data-slot="tabbar" data-tab="inicio"></div>
+</section>
+
+<!-- ============ ADMIN (10–14) ============ -->
+<section class="screen" data-screen="a-panel" hidden><div class="admin" data-admin="a-panel"></div></section>
+<section class="screen" data-screen="a-categorias" hidden><div class="admin" data-admin="a-categorias"></div></section>
+<section class="screen" data-screen="a-votaciones" hidden><div class="admin" data-admin="a-votaciones"></div></section>
+<section class="screen" data-screen="a-opciones" hidden><div class="admin" data-admin="a-opciones"></div></section>
+<section class="screen" data-screen="a-resultados" hidden><div class="admin" data-admin="a-resultados"></div></section>
+<section class="screen" data-screen="a-jurados" hidden><div class="admin" data-admin="a-jurados"></div></section>
+
+<!-- ============ JURADO (15–16) ============ -->
+<section class="screen" data-screen="j-panel" hidden>
+  <div data-slot="appbar"></div>
+  <div class="wrap" data-jur="j-panel"></div>
+  <div data-slot="tabbar" data-tab="j-panel"></div>
+</section>
+<section class="screen" data-screen="j-calificar" hidden>
+  <div data-slot="appbar"></div>
+  <div class="wrap" data-jur="j-calificar"></div>
+  <div data-slot="tabbar" data-tab="j-panel"></div>
+</section>
+
+</div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const LOGO='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#F4B400"/><path d="M21 17 L25 14 L29 17 L33 14 L37 17 L41 14 L43 17 L43 47 L41 50 L37 47 L33 50 L29 47 L25 50 L21 47 Z" fill="#E23D32"/><path d="M25 14 V50 M29 17 V47 M33 14 V50 M37 17 V47 M41 14 V50" stroke="#8E1F1A" stroke-width="2"/><rect x="8" y="13" width="14" height="38" rx="3.5" fill="#1A1405"/><rect x="42" y="13" width="14" height="38" rx="3.5" fill="#1A1405"/><circle cx="15" cy="21" r="2.4" fill="#F4F1E8"/><circle cx="15" cy="29" r="2.4" fill="#F4F1E8"/><circle cx="15" cy="37" r="2.4" fill="#F4F1E8"/><circle cx="15" cy="45" r="2.4" fill="#F4F1E8"/><rect x="45" y="18" width="8" height="4" rx="1.5" fill="#F4F1E8"/><rect x="45" y="26" width="8" height="4" rx="1.5" fill="#F4F1E8"/><rect x="45" y="34" width="8" height="4" rx="1.5" fill="#F4F1E8"/><rect x="45" y="42" width="8" height="4" rx="1.5" fill="#F4F1E8"/></svg>';
+
+(function(){
+/* ---------- datos de ejemplo (ilustrativos) ---------- */
+const CATS=[
+  {id:'musica',nombre:'Música',desc:'Canciones y presentaciones en tarima',color:['#F4B400','#E23D32'],ico:'acordeon',activa:true,orden:1},
+  {id:'piloneras',nombre:'Piloneras',desc:'Grupos del desfile de apertura',color:['#E23D32','#8E1F4A'],ico:'pollera',activa:true,orden:2},
+  {id:'publico',nombre:'Reconocimientos del público',desc:'Vestuario, ambiente y otros',color:['#35B2A1','#1B4535'],ico:'sombrero',activa:true,orden:3}
+];
+const VOTS=[
+  {id:'cancion',cat:'musica',nombre:'Mejor canción inédita',estado:'abierta',fecha:'Cierra 29 abr 2027 · 11:59 p. m.',ops:4,votos:3315,peso:70},
+  {id:'tarima',cat:'musica',nombre:'Mejor presentación en tarima',estado:'proxima',fecha:'Abre 30 abr 2027',ops:6,votos:0,peso:70},
+  {id:'aire',cat:'musica',nombre:'Tu aire favorito',estado:'cerrada',fecha:'Cerró 25 abr 2027',ops:4,votos:5820,peso:0},
+  {id:'pilon',cat:'piloneras',nombre:'Grupo de piloneras favorito',estado:'proxima',fecha:'Abre 26 abr 2027',ops:8,votos:0,peso:70},
+  {id:'vestuario',cat:'publico',nombre:'Vestuario más colorido',estado:'borrador',fecha:'Sin fechas',ops:1,votos:0,peso:0}
+];
+const OPS=[
+  {id:'a',nombre:'Brisa del Guatapurí',aire:'Paseo',autor:'Compositor(a) inscrito(a) #07',c:['#F4B400','#C47A00'],votos:1284,activa:true,jur:[7,6,8]},
+  {id:'b',nombre:'Pilón de mi tierra',aire:'Merengue',autor:'Compositor(a) inscrito(a) #19',c:['#E23D32','#8E1F4A'],votos:976,activa:true,jur:[9,9,9]},
+  {id:'c',nombre:'Sabana de sol',aire:'Son',autor:'Compositor(a) inscrito(a) #33',c:['#35B2A1','#155E57'],votos:642,activa:true,jur:[8,7,8]},
+  {id:'d',nombre:'Puya pa\' la plaza',aire:'Puya',autor:'Compositor(a) inscrito(a) #41',c:['#7A5CFF','#35207A'],votos:413,activa:true,jur:[6,5,6]}
+];
+const JURADOS=[
+  {nombre:'Rafael Calderón',email:'jurado1@festival.test',asig:3,calif:2},
+  {nombre:'Leandro Mejía',email:'jurado2@festival.test',asig:3,calif:2},
+  {nombre:'Rosa Ochoa',email:'jurado3@festival.test',asig:3,calif:1}
+];
+const modalidad=v=>v.peso===0?'Solo público':v.peso===100?'Solo jurado':`Jurado ${v.peso} % + público ${100-v.peso} %`;
+const TRACE={
+  inicio:['CU-03','RF-07'],registro:['CU-01','RF-01','RN-04'],login:['CU-02','RF-02'],categorias:['CU-03','RF-07'],
+  votaciones:['CU-03','RF-07'],detalle:['CU-03','RF-07','RN-06','RN-11'],opciones:['CU-04','RF-08'],confirmacion:['CU-04','RF-08','RN-05'],
+  resultado:['CU-04','RF-09','RF-10'],'a-panel':['CU-05…08','RF-03','RF-13'],'a-categorias':['CU-05','RF-04'],
+  'a-votaciones':['CU-06','RF-05','RN-07','RN-11'],'a-opciones':['CU-07','RF-06','RN-08'],'a-resultados':['CU-08','RF-11','RF-16','RN-11'],
+  'a-jurados':['CU-10','RF-17','RN-13'],'j-panel':['CU-09','RF-15','RN-13'],'j-calificar':['CU-09','RF-15','RN-14']
+};
+const S={user:null,role:null,cat:'musica',sel:null,variant:'ok',code:'',score:{},calificada:false,falta:false};
+const $=(q,r=document)=>r.querySelector(q), $$=(q,r=document)=>[...r.querySelectorAll(q)];
+const esc=s=>String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+const fmt=n=>n.toLocaleString('es-CO');
+const toast=(t)=>{const el=$('#toast');el.textContent=t;el.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('show'),2600)};
+const ESTADO={abierta:'Abierta',proxima:'Próxima',cerrada:'Cerrada',borrador:'Borrador'};
+
+/* ---------- íconos ---------- */
+const ICO={
+  acordeon:'<svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="3" stroke-linejoin="round"><rect x="6" y="14" width="12" height="36" rx="3" fill="#0D271E"/><rect x="46" y="14" width="12" height="36" rx="3" fill="#0D271E"/><path d="M18 16l5 32 5-32 4 32 4-32 5 32 5-32"/></svg>',
+  pollera:'<svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="3" stroke-linejoin="round"><circle cx="32" cy="12" r="6" fill="#0D271E"/><path d="M26 22h12l4 14H22z" fill="#0D271E"/><path d="M22 36c-8 6-12 14-12 20h44c0-6-4-14-12-20"/><path d="M14 48c6 3 30 3 36 0"/></svg>',
+  sombrero:'<svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="3" stroke-linejoin="round"><ellipse cx="32" cy="42" rx="26" ry="8" fill="#0D271E"/><path d="M20 40c0-14 4-22 12-22s12 8 12 22"/><path d="M21 34h22M22 28h20"/></svg>'
+};
+const iHome='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>';
+const iGrid='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg>';
+const iStar='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.2 1 5.8L12 16.4 6.8 19.2l1-5.8L3.5 9.2l5.9-.9z"/></svg>';
+const iUser='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>';
+
+/* ---------- acordeón del hero ---------- */
+(function(){
+  const s=$('#acordeon');let folds='';const x0=92,x1=268,n=11,w=(x1-x0)/n;
+  for(let i=0;i<n;i++){const a=x0+i*w;folds+=`<polygon points="${a},30 ${a+w/2},22 ${a+w},30 ${a+w},190 ${a+w/2},198 ${a},190" fill="${i%2?'#B8261E':'#E23D32'}" stroke="#0D271E" stroke-width="2"/>`;}
+  let btnL='',btnR='';
+  for(let r=0;r<5;r++){for(let c=0;c<2;c++){btnL+=`<circle cx="${38+c*22}" cy="${60+r*25}" r="7" fill="#F4F1E8"/>`;}}
+  for(let r=0;r<6;r++){btnR+=`<rect x="${286}" y="${46+r*23}" width="44" height="15" rx="4" fill="${r%2?'#F4F1E8':'#0D271E'}" stroke="#F4F1E8" stroke-width="2"/>`;}
+  s.innerHTML=`<ellipse cx="180" cy="210" rx="150" ry="8" fill="#0006"/>
+  <g class="fuelle">${folds}</g>
+  <rect x="18" y="26" width="76" height="170" rx="14" fill="#F4B400" stroke="#0D271E" stroke-width="3"/>${btnL}
+  <rect x="266" y="26" width="76" height="170" rx="14" fill="#F4B400" stroke="#0D271E" stroke-width="3"/>${btnR}
+  <path d="M30 196 q60 22 150 22 q90 0 150 -22" fill="none" stroke="#0D271E" stroke-width="3" opacity=".5"/>`;
+})();
+
+/* ---------- piezas compartidas ---------- */
+function appbar(){
+  const logged=!!S.user;
+  return `<header class="appbar">
+    <button class="brand" data-go="inicio" aria-label="Ir al inicio"><span class="brand-mark">${LOGO}</span><span><b>Tu Voto Vallenato</b><small>Festival 2027</small></span></button>
+    <nav class="topnav" aria-label="Principal"><button data-go="inicio">Inicio</button><button data-go="categorias">Categorías</button>${S.role==='admin'?'<button data-go="a-panel">Administración</button>':''}${S.role==='jurado'?'<button data-go="j-panel">Jurado</button>':''}</nav>
+    <span class="sp"></span>
+    ${logged?`<button class="btn btn-ghost btn-sm" data-toggle-user>${esc(S.user)} · Salir</button>`:`<button class="btn btn-sol btn-sm" data-go="login">Ingresar</button>`}
+  </header>`;
+}
+function tabbar(on){
+  const t=(id,label,ic)=>`<button data-go="${id}" class="${on===id?'on':''}">${ic}${label}</button>`;
+  return `<nav class="tabbar" aria-label="Navegación inferior">${t('inicio','Inicio',iHome)}${t('categorias','Categorías',iGrid)}${S.role==='jurado'?t('j-panel','Jurado',iStar):S.user?`<button data-toggle-user>${iUser}Salir</button>`:t('login','Ingresar',iUser)}</nav>`;
+}
+function catCards(){
+  return CATS.filter(c=>c.activa).sort((a,b)=>a.orden-b.orden).map(c=>{
+    const n=VOTS.filter(v=>v.cat===c.id&&v.estado!=='borrador').length;
+    return `<button class="cat" data-cat="${c.id}">
+      <span class="cat-art" style="background:linear-gradient(135deg,${c.color[0]},${c.color[1]})"><span class="ico">${ICO[c.ico]||ICO.acordeon}</span><span class="n">${n} votaci${n===1?'ón':'ones'}</span></span>
+      <span class="cat-body"><h3>${esc(c.nombre)}</h3><p>${esc(c.desc)}</p></span></button>`;}).join('');
+}
+function thumb(o){return `background:linear-gradient(140deg,${o.c[0]},${o.c[1]})`;}
+
+function renderShared(){
+  $$('[data-slot="appbar"]').forEach(el=>el.innerHTML=appbar());
+  $$('[data-slot="tabbar"]').forEach(el=>el.innerHTML=tabbar(el.dataset.tab));
+  $$('[data-slot="cats"]').forEach(el=>el.innerHTML=catCards());
+}
+
+/* ---------- 5. votaciones ---------- */
+function renderVotaciones(){
+  const c=CATS.find(x=>x.id===S.cat)||CATS[0];
+  const list=VOTS.filter(v=>v.cat===c.id&&v.estado!=='borrador');
+  $('#v-wrap').innerHTML=`<div class="crumbs"><span>Festival 2027</span>›<span>Categorías</span>›<b>${esc(c.nombre)}</b></div>
+    <button class="back" data-go="categorias">← Todas las categorías</button>
+    <div style="display:flex;flex-direction:column;gap:6px"><h1 class="h-display" style="font-size:32px">${esc(c.nombre)}</h1><p class="muted">${esc(c.desc)}</p></div>
+    <div class="vlist">${list.length?list.map(v=>{
+      const ok=v.estado==='abierta';
+      return `<button class="vrow" ${ok?`data-go="detalle"`:`aria-disabled="true" data-toast="${v.estado==='proxima'?'Esta votación aún no abre. '+esc(v.fecha)+'.':'Esta votación ya cerró.'}"`}>
+        <h3>${esc(v.nombre)}</h3><span class="go" aria-hidden="true">${ok?'→':''}</span>
+        <span class="meta"><span class="pill ${v.estado}">${ESTADO[v.estado]}</span><span>${esc(v.fecha)}</span><span>${v.ops} opciones</span></span></button>`;}).join(''):'<p class="panel muted">Esta categoría aún no tiene votaciones publicadas.</p>'}</div>
+    <p class="note">Solo se puede votar en las votaciones abiertas (RN-02).</p>`;
+}
+
+/* ---------- 7. opciones ---------- */
+function renderOpciones(){
+  $('#ops').innerHTML=OPS.filter(o=>o.activa).map(o=>`<button class="op" role="radio" aria-checked="${S.sel===o.id}" data-op="${o.id}">
+    <span class="thumb" style="${thumb(o)}"><b>${o.id.toUpperCase()}</b><span class="franja"></span></span>
+    <span class="tick" aria-hidden="true">✓</span>
+    <span class="ob"><span class="aire" style="align-self:flex-start">${o.aire}</span><h3>${esc(o.nombre)}</h3><span class="sub">${o.autor}</span></span></button>`).join('');
+  const o=OPS.find(x=>x.id===S.sel);
+  $('#sel-txt').innerHTML=o?`Seleccionaste<b>${esc(o.nombre)}</b>`:'Ninguna opción seleccionada<b>—</b>';
+  $('#btn-votar').disabled=!o;
+}
+function renderConfirm(){
+  const o=OPS.find(x=>x.id===S.sel)||OPS[0];
+  $('#elegida').innerHTML=`<span class="mini" style="${thumb(o)}">${o.id.toUpperCase()}</span><span><span class="muted" style="font-size:12px">Mejor canción inédita</span><br><b style="font-size:17px">${esc(o.nombre)}</b><br><span class="muted" style="font-size:12.5px">${o.aire} · ${o.autor}</span></span>`;
+}
+
+/* ---------- 9. resultado ---------- */
+function renderResultado(){
+  const o=OPS.find(x=>x.id===S.sel)||OPS[0];
+  if(!S.code)S.code='VLL27-'+Math.random().toString(36).slice(2,6).toUpperCase()+'-'+(1000+Math.floor(Math.random()*9000));
+  const now=new Date();const f=now.toLocaleDateString('es-CO',{day:'numeric',month:'short',year:'numeric'})+' · '+now.toLocaleTimeString('es-CO',{hour:'2-digit',minute:'2-digit'});
+  let h='';
+  if(S.variant==='ok'){
+    h=`<div class="sheet"><div class="franja"></div><div class="sheet-top"><span class="sello" aria-hidden="true">✓</span><span class="eyebrow">Voto registrado</span><h1>¡Ese voto sonó, compadre!</h1><p class="muted">Tu voto por <b style="color:var(--texto)">${esc(o.nombre)}</b> quedó guardado.</p>
+      <div class="comprobante"><div><span>Comprobante</span><code>${S.code}</code></div><div><span>Votación</span><b>Mejor canción inédita</b></div><div><span>Fecha y hora</span><b>${f}</b></div></div>
+      <p class="note">Guarda tu código por si necesitas hacer un reclamo (RF-10).</p></div>
+      <div class="sheet-actions"><button class="btn btn-sol btn-block" data-go="categorias">Ver otras votaciones</button><button class="btn btn-ghost btn-block" data-go="inicio">Ir al inicio</button></div></div>`;
+  }else if(S.variant==='limite'){
+    h=`<div class="sheet"><div class="franja"></div><div class="sheet-top"><span class="sello mal" aria-hidden="true">!</span><span class="eyebrow" style="color:#FF8A80">Voto no registrado</span><h1>Ya votaste en esta votación</h1><p class="muted">La regla de esta votación permite un voto por persona. Tu voto anterior sigue contando.</p><span class="pend">Frecuencia de voto · RN-06</span></div>
+      <div class="sheet-actions"><button class="btn btn-sol btn-block" data-go="categorias">Ver otras votaciones</button></div></div>`;
+  }else{
+    h=`<div class="sheet"><div class="franja"></div><div class="sheet-top"><span class="sello gris" aria-hidden="true">⏱</span><span class="eyebrow" style="color:var(--texto-2)">Voto no registrado</span><h1>Esta votación ya cerró</h1><p class="muted">Cerró el 29 abr 2027 a las 11:59 p. m. No se reciben más votos (RN-02).</p></div>
+      <div class="sheet-actions"><button class="btn btn-sol btn-block" data-go="categorias">Ver votaciones abiertas</button></div></div>`;
+  }
+  $('#res-box').innerHTML=h;
+  $$('[data-var]').forEach(b=>{b.classList.toggle('btn-sol',b.dataset.var===S.variant);b.classList.toggle('btn-ghost',b.dataset.var!==S.variant)});
+}
+
+/* ---------- ADMIN ---------- */
+const AUD=[
+  ['10:42','admin.fundacion','Publicó “Mejor canción inédita”'],
+  ['10:15','admin.fundacion','Agregó la opción “Puya pa\' la plaza”'],
+  ['09:58','admin.fundacion','Cambió la fecha de cierre de “Tu aire favorito”'],
+  ['09:30','sistema','Cerró automáticamente “Tu aire favorito”']
+];
+function admShell(id,inner){
+  const it=(k,l)=>`<button data-go="${k}" class="${id===k?'on':''}"><span class="dot"></span>${l}</button>`;
+  return `<header class="adm-bar"><button class="brand" data-go="a-panel"><span class="brand-mark">${LOGO}</span><span><b>Tu Voto Vallenato</b><small>Administración</small></span></button><span class="role">Admin</span><span style="flex:1"></span><button class="btn btn-ghost btn-sm" data-go="inicio">Ver sitio</button></header>
+  <div class="adm-body"><nav class="adm-nav" aria-label="Administración">${it('a-panel','Panel')}${it('a-categorias','Categorías')}${it('a-votaciones','Votaciones')}${it('a-opciones','Opciones')}${it('a-jurados','Jurados')}${it('a-resultados','Resultados')}</nav><main class="adm-main">${inner}</main></div>`;
+}
+function admPanel(){
+  const abiertas=VOTS.filter(v=>v.estado==='abierta').length;
+  return admShell('a-panel',`<div class="adm-head"><div><span class="eyebrow">Edición 2027 · activa</span><h1>Panel principal</h1></div><button class="btn btn-sol btn-sm" data-go="a-votaciones">+ Nueva votación</button></div>
+  <div class="kpis"><div class="kpi"><small>Votaciones abiertas</small><b>${abiertas}</b></div><div class="kpi"><small>Votos hoy</small><b>812</b><em>ejemplo</em></div><div class="kpi"><small>Categorías activas</small><b>${CATS.filter(c=>c.activa).length}</b></div><div class="kpi"><small>Votantes registrados</small><b>2.947</b><em>ejemplo</em></div></div>
+  <div class="two">
+    <div class="panel" style="display:flex;flex-direction:column;gap:12px"><div class="row-between"><h2 class="sec" style="font-size:17px">Votaciones</h2><button class="link" data-go="a-votaciones">Gestionar →</button></div>
+      <div class="tbl-wrap"><table><thead><tr><th>Votación</th><th>Estado</th><th class="num">Votos</th></tr></thead><tbody>${VOTS.map(v=>`<tr><td>${esc(v.nombre)}<br><span class="note">${esc((CATS.find(c=>c.id===v.cat)||{}).nombre||'')}</span></td><td><span class="pill ${v.estado}">${ESTADO[v.estado]}</span></td><td class="num">${fmt(v.votos)}</td></tr>`).join('')}</tbody></table></div></div>
+    <div class="panel" style="display:flex;flex-direction:column;gap:8px"><h2 class="sec" style="font-size:17px">Auditoría reciente</h2><ul class="log" style="margin:0;padding:0;list-style:none">${AUD.map(a=>`<li><time>${a[0]}</time><span>${esc(a[2])}<br><span class="note">${a[1]}</span></span></li>`).join('')}</ul><p class="note">Toda acción queda registrada con usuario, fecha e IP (RF-13).</p></div>
+  </div>`);
+}
+function admCats(){
+  return admShell('a-categorias',`<div class="adm-head"><div><span class="eyebrow">Edición 2027</span><h1>Gestión de categorías</h1></div></div>
+  <form class="panel form-grid" id="f-cat" novalidate><div class="field"><label for="c-nombre">Nombre de la categoría</label><input class="input" id="c-nombre" placeholder="Ej.: Comparsas"><span class="errmsg" id="e-cat"></span></div><div class="field"><label for="c-desc">Descripción</label><input class="input" id="c-desc" placeholder="Qué agrupa esta categoría"></div><div class="full"><button class="btn btn-sol btn-sm" type="submit">+ Agregar categoría</button></div></form>
+  <div class="tbl-wrap"><table><thead><tr><th>Orden</th><th>Categoría</th><th>Votaciones</th><th>Estado</th><th>Acciones</th></tr></thead><tbody>${CATS.sort((a,b)=>a.orden-b.orden).map((c,i)=>{const n=VOTS.filter(v=>v.cat===c.id).length;const ab=VOTS.some(v=>v.cat===c.id&&v.estado==='abierta');return `<tr><td class="num">${c.orden}</td><td><b>${esc(c.nombre)}</b><br><span class="note">${esc(c.desc)}</span></td><td class="num">${n}</td><td><span class="pill ${c.activa?'abierta':'inactiva'}">${c.activa?'Activa':'Inactiva'}</span></td><td><div class="acts"><button class="btn btn-ghost btn-sm" data-up="${c.id}" ${i===0?'disabled':''} aria-label="Subir">↑</button><button class="btn btn-ghost btn-sm" data-toast="Abre el formulario de edición (CU-05).">Editar</button><button class="btn btn-ghost btn-sm" data-togcat="${c.id}" data-open="${ab}">${c.activa?'Inactivar':'Activar'}</button></div></td></tr>`}).join('')}</tbody></table></div>
+  <p class="note">Si la categoría tiene votaciones abiertas, el sistema pide confirmar antes de inactivarla (CU-05, flujo 3a). El nombre no puede repetirse en la misma edición.</p>`);
+}
+function admVots(){
+  return admShell('a-votaciones',`<div class="adm-head"><div><span class="eyebrow">Edición 2027</span><h1>Gestión de votaciones</h1></div></div>
+  <div class="tbl-wrap"><table><thead><tr><th>Votación</th><th>Categoría</th><th>Resultado</th><th>Opciones</th><th>Estado</th><th>Acciones</th></tr></thead><tbody>${VOTS.map(v=>`<tr><td><b>${esc(v.nombre)}</b><br><span class="note">${esc(v.fecha)}</span></td><td>${esc((CATS.find(c=>c.id===v.cat)||{}).nombre||'')}</td><td class="note">${modalidad(v)}</td><td class="num">${v.ops}</td><td><span class="pill ${v.estado}">${ESTADO[v.estado]}</span></td><td><div class="acts"><button class="btn btn-ghost btn-sm" data-go="a-opciones">Opciones</button>${v.estado==='borrador'?`<button class="btn btn-ghost btn-sm" data-pub="${v.id}">Publicar</button>`:''}${v.estado==='abierta'?`<button class="btn btn-ghost btn-sm" data-toast="Cerrar antes de tiempo exige una justificación (CU-06, 4b).">Cerrar</button>`:''}</div></td></tr>`).join('')}</tbody></table></div>
+  <form class="panel" id="f-vot" novalidate style="display:flex;flex-direction:column;gap:14px">
+    <div class="row-between"><h2 class="sec" style="font-size:18px">Nueva votación</h2><span class="pill borrador">Borrador</span></div>
+    <div class="form-grid">
+      <div class="field full"><label for="v-nombre">Nombre</label><input class="input" id="v-nombre" value="Mejor comparsa del desfile"></div>
+      <div class="field"><label for="v-cat">Categoría</label><select class="input" id="v-cat">${CATS.map(c=>`<option value="${c.id}">${esc(c.nombre)}</option>`).join('')}</select></div>
+      <div class="field"><label for="v-frec">Frecuencia de voto</label><select class="input" id="v-frec"><option>1 voto por persona en la votación (propuesto)</option><option>1 voto por persona por día</option></select><span class="hint"><span class="pend">Pendiente · RN-06 / P-03</span></span></div>
+      <div class="field"><label for="v-ini">Apertura</label><input class="input" id="v-ini" type="datetime-local" value="2027-04-28T08:00"></div>
+      <div class="field"><label for="v-fin">Cierre</label><input class="input" id="v-fin" type="datetime-local" value="2027-04-27T23:59"><span class="errmsg" id="e-fechas"></span></div>
+      <div class="field"><label for="v-vis">Visibilidad de resultados</label><select class="input" id="v-vis"><option>Solo administradores</option><option>Públicos al cierre</option><option>Públicos en tiempo real</option></select><span class="hint"><span class="pend">Pendiente · RN-10 / P-05</span></span></div>
+      <div class="field"><label for="v-desc">Descripción</label><input class="input" id="v-desc" placeholder="Texto que verá el votante"></div>
+      <div class="field"><label for="v-peso">Peso del jurado (%)</label><input class="input" id="v-peso" type="number" min="0" max="100" step="5" value="70"><span class="hint" id="v-peso-out">Jurado 70 % + público 30 % · <span class="pend">Propuesta · RN-11 / P-06</span></span></div>
+      <div class="field"><label for="v-escala">Puntaje máximo del jurado</label><input class="input" id="v-escala" type="number" min="2" max="100" value="10"><span class="hint">Cada jurado califica de 1 a este valor <span class="pend">P-16</span></span></div>
+      <div class="field full"><label>Jurados asignados</label><div class="checks">${JURADOS.map((j,i)=>`<label class="check"><input type="checkbox" ${i<3?'checked':''}> ${esc(j.nombre)}</label>`).join('')}</div><span class="hint">Solo los jurados marcados pueden calificar (RN-13)</span></div>
+    </div>
+    <div class="errmsg" id="e-pub"></div>
+    <div class="acts"><button class="btn btn-ghost btn-sm" type="submit" data-act="guardar">Guardar borrador</button><button class="btn btn-sol btn-sm" type="submit" data-act="publicar">Publicar</button></div>
+    <p class="note">Prueba: el cierre de ejemplo es anterior a la apertura, y la votación nueva aún no tiene opciones. El sistema no deja publicarla.</p>
+  </form>`);
+}
+function admOps(){
+  return admShell('a-opciones',`<div class="adm-head"><div><span class="eyebrow">Música › Mejor canción inédita</span><h1>Gestión de opciones</h1></div><span class="pill abierta">Abierta · ${fmt(3315)} votos</span></div>
+  <div class="aviso"><span aria-hidden="true">!</span><span><b>Esta votación ya tiene votos.</b> Las opciones no se pueden eliminar, solo inactivar con una justificación que queda en auditoría (RN-08).</span></div>
+  <div class="tbl-wrap"><table><thead><tr><th>Opción</th><th>Aire</th><th>Estado</th><th>Acciones</th></tr></thead><tbody>${OPS.map(o=>`<tr><td><div class="opt-cell"><span class="mini" style="${thumb(o)}">${o.id.toUpperCase()}</span><span><b>${esc(o.nombre)}</b><br><span class="note">${o.autor}</span></span></div><div id="just-${o.id}"></div></td><td>${o.aire}</td><td><span class="pill ${o.activa?'abierta':'inactiva'}">${o.activa?'Activa':'Inactiva'}</span></td><td><div class="acts"><button class="btn btn-ghost btn-sm" data-toast="Abre la edición: nombre, descripción, imagen y orden (CU-07).">Editar</button><button class="btn btn-ghost btn-sm" data-inact="${o.id}">${o.activa?'Inactivar':'Reactivar'}</button><button class="btn btn-ghost btn-sm" disabled title="No disponible: la votación tiene votos">Eliminar</button></div></td></tr>`).join('')}</tbody></table></div>
+  <form class="panel form-grid" id="f-op" novalidate><div class="field"><label for="o-nombre">Nueva opción</label><input class="input" id="o-nombre" placeholder="Título de la canción"></div><div class="field"><label for="o-img">Imagen</label><input class="input" id="o-img" type="file" accept="image/png,image/jpeg,image/webp"><span class="hint">JPG, PNG o WEBP · máx. 2 MB (propuesto)</span></div><div class="full"><button class="btn btn-sol btn-sm" type="submit">+ Agregar opción</button></div></form>`);
+}
+function admRes(){
+  const ops=OPS.filter(o=>o.activa!==false||o.votos);
+  const tot=ops.reduce((a,o)=>a+o.votos,0), totj=ops.reduce((a,o)=>a+o.jur.reduce((x,y)=>x+y,0),0);
+  const rows=ops.map(o=>{const sj=o.jur.reduce((x,y)=>x+y,0);const pp=o.votos/tot*100,pj=sj/totj*100;return {...o,prom:sj/o.jur.length,pp,pj,aj:.7*pj,ap:.3*pp,fin:.7*pj+.3*pp};}).sort((a,b)=>b.fin-a.fin);
+  return admShell('a-resultados',`<div class="adm-head"><div><span class="eyebrow">Consulta de resultados</span><h1>Mejor canción inédita</h1></div><span class="pill proxima">Parciales · votación abierta</span></div>
+  <div class="kpis"><div class="kpi"><small>Votos del público</small><b>${fmt(tot)}</b><em>ejemplo</em></div><div class="kpi"><small>Jurados que calificaron</small><b>2/3</b></div><div class="kpi"><small>Votos rechazados</small><b>57</b><em>límite o fuera de fecha</em></div><div class="kpi"><small>Actualizado</small><b style="font-size:20px">10:45</b></div></div>
+  <div class="panel" style="display:flex;flex-direction:column;gap:8px"><div class="row-between"><h2 class="sec" style="font-size:17px">Cómo se calcula</h2><span class="note">Jurado 70 % + público 30 % <span class="pend">RN-11 · P-06</span></span></div>
+    <div class="peso"><div class="j" style="width:70%"></div><div class="p" style="width:30%"></div></div>
+    <p class="note" style="margin:0">Resultado final = 70 % × participación en los puntajes del jurado + 30 % × participación en los votos del público.</p></div>
+  <div class="panel" style="display:flex;flex-direction:column;gap:14px"><div class="row-between"><h2 class="sec" style="font-size:17px">Resultado por opción</h2><div class="leyenda"><span><i style="background:var(--sol)"></i>Jurado</span><span><i style="background:var(--rio)"></i>Público</span></div></div>
+    <div class="bars">${rows.map((o,i)=>`<div class="bar-row"><div class="bar-top"><b>${i===0?'🏆 ':''}${esc(o.nombre)}</b><span><strong>${o.fin.toFixed(1)} %</strong></span></div><div class="track apil" role="img" aria-label="${esc(o.nombre)}: ${o.fin.toFixed(1)} %"><div class="fj" style="width:${o.aj}%"></div><div class="fp" style="width:${o.ap}%"></div></div><span class="note">Jurado: promedio <b>${o.prom.toFixed(1)}</b>/10 · ${o.pj.toFixed(1)} % &nbsp;·&nbsp; Público: <b>${fmt(o.votos)}</b> votos · ${o.pp.toFixed(1)} %</span></div>`).join('')}</div>
+    <div class="aviso"><span aria-hidden="true">!</span><span>Falta 1 jurado por calificar: el resultado puede cambiar.</span></div></div>
+  <div class="row-between"><p class="note">Visibilidad pública de estos resultados: <span class="pend">Pendiente · P-05</span> · Certificación antes de publicar: <span class="pend">P-12</span></p>
+  <div class="acts"><button class="btn btn-ghost btn-sm" data-toast="Exportación simulada: CSV con votos, puntajes y resultado final.">Exportar CSV</button><button class="btn btn-ghost btn-sm" data-toast="Exportación simulada: PDF (formato pendiente de validación).">Exportar PDF</button></div></div>`);
+}
+function admJur(){
+  return admShell('a-jurados',`<div class="adm-head"><div><span class="eyebrow">Edición 2027</span><h1>Gestión de jurados</h1></div></div>
+  <div class="two">
+    <div class="tbl-wrap"><table><thead><tr><th>Jurado</th><th>Correo</th><th class="num">Asignadas</th><th class="num">Calificadas</th></tr></thead><tbody>${JURADOS.map(j=>`<tr><td><b>${esc(j.nombre)}</b></td><td class="note">${esc(j.email)}</td><td class="num">${j.asig}</td><td class="num">${j.calif}</td></tr>`).join('')}</tbody></table></div>
+    <form class="panel" id="f-jur" novalidate style="display:flex;flex-direction:column;gap:12px"><h2 class="sec" style="font-size:17px">Nuevo jurado</h2>
+      <div class="field"><label for="j-nombre">Nombre completo</label><input class="input" id="j-nombre" placeholder="Ej.: Carmen Daza"></div>
+      <div class="field"><label for="j-email">Correo</label><input class="input" id="j-email" placeholder="jurado@ejemplo.com"><span class="errmsg" id="e-jur"></span></div>
+      <div class="field"><label for="j-pass">Contraseña inicial</label><input class="input" id="j-pass" type="password" placeholder="Mínimo 8 caracteres"></div>
+      <button class="btn btn-sol btn-sm" type="submit">Crear jurado</button>
+      <p class="note" style="margin:0">Después se asigna a cada votación en «Gestión de votaciones». Cuántos jurados habrá y quién los designa: <span class="pend">P-17</span></p>
+    </form>
+  </div>`);
+}
+/* ---------- jurado (15–16) ---------- */
+function jPanel(){
+  const asig=VOTS.filter(v=>v.peso>0&&v.estado!=='borrador');
+  return `<div style="display:flex;flex-direction:column;gap:4px"><span class="eyebrow">Jurado · Rosa Ochoa</span><h1 class="h-display" style="font-size:30px;margin:0">Votaciones asignadas</h1><p class="muted" style="margin:0">Califica cada opción con un puntaje. Tu calificación se envía una sola vez y no se puede cambiar.</p></div>
+  ${asig.map(v=>{const hecha=v.id==='cancion'&&S.calificada;return `<div class="jcard"><span class="eyebrow">${esc((CATS.find(c=>c.id===v.cat)||{}).nombre||'')}</span><b style="font-size:17px">${esc(v.nombre)}</b>
+    <div class="row-between" style="flex-wrap:wrap;gap:8px"><span class="pill ${v.estado}">${ESTADO[v.estado]}</span><span class="note">${modalidad(v)} · escala 1 a 10</span></div>
+    ${v.estado==='abierta'?(hecha?`<button class="btn btn-ghost" data-go="j-calificar">✓ Calificada · ver</button>`:`<button class="btn btn-sol" data-go="j-calificar">Calificar</button>`):`<span class="note">${esc(v.fecha)}</span>`}</div>`;}).join('')}
+  <p class="note">Solo ves las votaciones a las que fuiste asignado (RN-13). Como jurado no votas como público en ellas (RN-15).</p>`;
+}
+function jCalif(){
+  const ops=OPS.filter(o=>o.activa);const done=S.calificada;
+  return `<button class="back" data-go="j-panel">← Votaciones asignadas</button>
+  <div style="display:flex;flex-direction:column;gap:4px"><span class="eyebrow">Música · Jurado 70 % + público 30 %</span><h1 class="h-display" style="font-size:28px;margin:0">Mejor canción inédita</h1><p class="muted" style="margin:0">${done?'Esta es la calificación que enviaste.':'Califica cada opción de 1 a 10. Revisa bien: después de enviarla no se puede cambiar.'}</p></div>
+  ${ops.map(o=>`<div class="jcard ${S.falta&&!S.score[o.id]?'falta':''}"><div class="jhead"><span class="mini" style="${thumb(o)}">${o.id.toUpperCase()}</span><span><b>${esc(o.nombre)}</b><span class="note">${o.aire} · ${o.autor}</span></span>${done?`<span class="nota-j">${S.score[o.id]}</span>`:''}</div>
+    ${done?'':`<div class="escala" role="radiogroup" aria-label="Puntaje para ${esc(o.nombre)}">${[1,2,3,4,5,6,7,8,9,10].map(n=>`<button type="button" role="radio" aria-checked="${S.score[o.id]===n}" class="${S.score[o.id]===n?'on':''}" data-score="${o.id}:${n}">${n}</button>`).join('')}</div><input class="input" placeholder="Comentario opcional" aria-label="Comentario para ${esc(o.nombre)}">`}</div>`).join('')}
+  ${done?'':`<button class="btn btn-sol btn-block" id="btn-calificar">Enviar calificación</button>`}
+  <p class="note">Tu calificación pesa el 70 % del resultado final; el voto del público, el 30 %. <span class="pend">P-06</span></p>`;
+}
+const JUR={'j-panel':jPanel,'j-calificar':jCalif};
+const ADM={'a-panel':admPanel,'a-categorias':admCats,'a-votaciones':admVots,'a-opciones':admOps,'a-resultados':admRes,'a-jurados':admJur};
+
+/* ---------- navegación ---------- */
+let cur='inicio';
+function go(id,push=true){
+  if(!TRACE[id])id='inicio';
+  if(id.startsWith('a-')&&S.role!=='admin'){S.role='admin';S.user='admin.fundacion';}
+  if(id.startsWith('j-')&&S.role!=='jurado'){S.role='jurado';S.user='Rosa';}
+  cur=id;
+  renderShared();
+  if(id==='votaciones')renderVotaciones();
+  if(id==='opciones')renderOpciones();
+  if(id==='confirmacion')renderConfirm();
+  if(id==='resultado')renderResultado();
+  if(ADM[id])$(`[data-admin="${id}"]`).innerHTML=ADM[id]();
+  if(JUR[id])$(`[data-jur="${id}"]`).innerHTML=JUR[id]();
+  $$('.screen').forEach(s=>s.hidden=s.dataset.screen!==id);
+  $('#pick').value=id;
+  $('#trace').innerHTML=TRACE[id].map((t,i)=>`<span class="chip ${i===0?'cu':''}">${t}</span>`).join('');
+  if(push){try{history.replaceState(null,'','#'+id)}catch(e){}}
+  $('#device').scrollIntoView({block:'nearest'});window.scrollTo({top:0});
+}
+
+document.addEventListener('click',e=>{
+  const t=e.target.closest('button,a');if(!t)return;
+  if(t.dataset.toast){toast(t.dataset.toast);return;}
+  if(t.dataset.cat){S.cat=t.dataset.cat;go('votaciones');return;}
+  if(t.dataset.op){S.sel=t.dataset.op;renderOpciones();$(`[data-op="${S.sel}"]`).focus();return;}
+  if(t.id==='btn-votar'){if(!S.user){toast('Inicia sesión para votar (RN-04).');go('login');return;}go('confirmacion');return;}
+  if(t.id==='btn-confirmar'){S.variant='ok';S.code='';go('resultado');return;}
+  if(t.dataset.var){S.variant=t.dataset.var;renderResultado();return;}
+  if(t.hasAttribute('data-toggle-user')){S.user=null;S.role=null;toast('Sesión cerrada.');go('inicio');return;}
+  if(t.id==='demo-votante'){S.user='Ana María';S.role='votante';toast('Sesión iniciada como votante.');go('inicio');return;}
+  if(t.id==='demo-jurado'){S.user='Rosa';S.role='jurado';toast('Sesión iniciada como jurado.');go('j-panel');return;}
+  if(t.dataset.score){const [o,n]=t.dataset.score.split(':');S.score[o]=+n;$('[data-jur="j-calificar"]').innerHTML=jCalif();return;}
+  if(t.id==='btn-calificar'){const ops=OPS.filter(o=>o.activa);if(ops.some(o=>!S.score[o.id])){S.falta=true;$('[data-jur="j-calificar"]').innerHTML=jCalif();toast('Califica todas las opciones antes de enviar.');return;}
+    S.calificada=true;S.falta=false;JURADOS[2].calif++;AUD.unshift(['ahora','jurado3','Calificó “Mejor canción inédita” ('+ops.length+' opciones)']);toast('Calificación enviada. No se puede cambiar (RN-14).');go('j-panel');return;}
+  if(t.id==='demo-admin'){S.user='admin.fundacion';S.role='admin';toast('Sesión iniciada como administrador.');go('a-panel');return;}
+  if(t.dataset.togcat){const c=CATS.find(x=>x.id===t.dataset.togcat);
+    if(c.activa&&t.dataset.open==='true'&&!t.dataset.ok){t.dataset.ok='1';t.textContent='¿Seguro? Tiene votaciones abiertas';t.classList.add('btn-rojo');return;}
+    c.activa=!c.activa;AUD.unshift(['ahora','admin.fundacion',(c.activa?'Activó':'Inactivó')+' la categoría “'+c.nombre+'”']);go('a-categorias');toast(c.activa?'Categoría activada.':'Categoría inactivada.');return;}
+  if(t.dataset.up){const i=CATS.findIndex(x=>x.id===t.dataset.up);const a=CATS[i],b=CATS.find(x=>x.orden===a.orden-1);if(b){b.orden++;a.orden--;}go('a-categorias');return;}
+  if(t.dataset.pub){toast('No se puede publicar: necesita mínimo 2 opciones activas (RN-07).');return;}
+  if(t.dataset.inact){const o=OPS.find(x=>x.id===t.dataset.inact);
+    if(!o.activa){o.activa=true;go('a-opciones');toast('Opción reactivada.');return;}
+    const box=$('#just-'+o.id);box.innerHTML=`<div class="inline-just"><input class="input" id="j-${o.id}" placeholder="Justificación (obligatoria)"><button class="btn btn-rojo btn-sm" data-dojust="${o.id}">Inactivar</button></div>`;$('#j-'+o.id).focus();return;}
+  if(t.dataset.dojust){const o=OPS.find(x=>x.id===t.dataset.dojust);const v=$('#j-'+o.id).value.trim();
+    if(!v){$('#j-'+o.id).classList.add('err');toast('Escribe la justificación para inactivar.');return;}
+    o.activa=false;if(S.sel===o.id)S.sel=null;AUD.unshift(['ahora','admin.fundacion','Inactivó “'+o.nombre+'”: '+v]);go('a-opciones');toast('Opción inactivada y registrada en auditoría.');return;}
+  if(t.dataset.go){go(t.dataset.go);return;}
+});
+
+document.addEventListener('input',e=>{
+  if(e.target.id==='v-peso'){const v=Math.max(0,Math.min(100,+e.target.value||0));$('#v-peso-out').innerHTML=(v===0?'Solo público':v===100?'Solo jurado':`Jurado ${v} % + público ${100-v} %`)+' · <span class="pend">Propuesta · RN-11 / P-06</span>';}
+});
+document.addEventListener('submit',e=>{
+  e.preventDefault();const f=e.target;
+  if(f.id==='f-registro'){
+    let ok=true;const set=(id,msg,inp)=>{$('#'+id).textContent=msg;if(inp)$(inp).classList.toggle('err',!!msg);if(msg)ok=false;};
+    set('e-nombre',$('#r-nombre').value.trim()?'':'Escribe tu nombre.','#r-nombre');
+    set('e-id',/^\S+@\S+\.\S+$/.test($('#r-id').value)?'':'Escribe un correo válido, por ejemplo nombre@correo.com.','#r-id');
+    set('e-pass',$('#r-pass').value.length>=8?'':'La contraseña debe tener al menos 8 caracteres.','#r-pass');
+    set('e-datos',$('#r-datos').checked?'':'Debes autorizar el tratamiento de datos para crear la cuenta.');
+    if(ok){S.user=$('#r-nombre').value.trim().split(' ')[0];S.role='votante';toast('Cuenta creada. ¡Ya puedes votar!');go('inicio');}
+  }
+  if(f.id==='f-jur'){const n=$('#j-nombre').value.trim(),m=$('#j-email').value.trim();
+    if(!n||!/^\S+@\S+\.\S+$/.test(m)||$('#j-pass').value.length<8){$('#e-jur').textContent='Completa nombre, correo válido y contraseña de 8 caracteres o más.';return;}
+    JURADOS.push({nombre:n,email:m,asig:0,calif:0});AUD.unshift(['ahora','admin.fundacion','Creó el jurado '+n]);go('a-jurados');toast('Jurado creado. Asígnalo en Gestión de votaciones.');return;}
+  if(f.id==='f-login'){
+    const id=$('#l-id').value.trim(),p=$('#l-pass').value;
+    if(!id||!p){$('#e-login').textContent='Correo o contraseña incorrectos.';return;}
+    $('#e-login').textContent='';S.user=id.split('@')[0];S.role=/admin/i.test(id)?'admin':'votante';toast('Sesión iniciada.');go(S.role==='admin'?'a-panel':'inicio');
+  }
+  if(f.id==='f-cat'){
+    const n=$('#c-nombre').value.trim();
+    if(!n){$('#e-cat').textContent='Escribe el nombre de la categoría.';return;}
+    if(CATS.some(c=>c.nombre.toLowerCase()===n.toLowerCase())){$('#e-cat').textContent='Ya existe una categoría con ese nombre en esta edición.';return;}
+    CATS.push({id:'c'+Date.now(),nombre:n,desc:$('#c-desc').value.trim()||'Sin descripción',color:['#F4B400','#35B2A1'],ico:'sombrero',activa:true,orden:CATS.length+1});
+    AUD.unshift(['ahora','admin.fundacion','Creó la categoría “'+n+'”']);go('a-categorias');toast('Categoría creada.');
+  }
+  if(f.id==='f-vot'){
+    const act=e.submitter&&e.submitter.dataset.act;const ini=$('#v-ini').value,fin=$('#v-fin').value;
+    const bad=ini&&fin&&fin<=ini;$('#e-fechas').textContent=bad?'El cierre debe ser posterior a la apertura.':'';$('#v-fin').classList.toggle('err',bad);
+    if(bad)return;
+    if(act==='publicar'){$('#e-pub').textContent='No se puede publicar: agrega mínimo 2 opciones activas (RN-07). Guárdala como borrador.';return;}
+    VOTS.push({id:'v'+Date.now(),cat:$('#v-cat').value,nombre:$('#v-nombre').value.trim()||'Votación sin nombre',estado:'borrador',fecha:'Sin publicar',ops:0,votos:0});
+    AUD.unshift(['ahora','admin.fundacion','Guardó borrador “'+($('#v-nombre').value.trim())+'”']);go('a-votaciones');toast('Borrador guardado.');
+  }
+  if(f.id==='f-op'){
+    const n=$('#o-nombre').value.trim();if(!n){toast('Escribe el nombre de la opción.');return;}
+    const pal=[['#F4B400','#E23D32'],['#35B2A1','#F4B400'],['#E23D32','#35B2A1']];
+    OPS.push({id:String.fromCharCode(97+OPS.length),nombre:n,aire:'Paseo',autor:'Nueva opción',c:pal[OPS.length%3],votos:0,activa:true});
+    AUD.unshift(['ahora','admin.fundacion','Agregó la opción “'+n+'”']);go('a-opciones');toast('Opción agregada.');
+  }
+});
+
+$('#pick').addEventListener('change',e=>go(e.target.value));
+$$('.sizes button').forEach(b=>b.addEventListener('click',()=>{
+  $('#device').dataset.size=b.dataset.size;$$('.sizes button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+  try{localStorage.setItem('tvv-size',b.dataset.size)}catch(e){}
+}));
+try{const s=localStorage.getItem('tvv-size');if(s){const b=$(`.sizes button[data-size="${s}"]`);b&&b.click();}}catch(e){}
+const h=(location.hash||'').slice(1);
+go(TRACE[h]?h:'inicio',false);
+})();
+</script>
